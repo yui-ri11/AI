@@ -1,0 +1,5 @@
+import requests
+url='https://dct.ntcu.edu.tw/news.php'
+html=requests.get(url)
+html.encoding="utf-8"
+print(html.text)
