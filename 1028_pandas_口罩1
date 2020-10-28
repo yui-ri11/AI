@@ -1,0 +1,24 @@
+# prg#1
+# 連結開放資料，列印出前面五筆資料
+import csv
+import requests
+import pandas as pd
+
+#prefix = '臺北市大安區'
+#prefix = '臺中市'
+prefix='新竹市'
+
+# 需設定抓取的開放資料url位置
+url = "https://data.nhi.gov.tw/resource/mask/maskdata.csv"   # Open data 所在位置
+
+download = requests.get(url)  #取得url的下載資料
+decoded_content = download.content.decode('utf-8')  #把下載資料編碼成utf8
+cr = csv.reader(decoded_content.splitlines(), delimiter=',') #用csv.reader把資料分行並存入cr變數中
+
+original_list = list(cr)
+#print(original_list)
+
+mask_df = pd.DataFrame(original_list) #把資料轉換成pandas的表格格式
+mask_df.head()                        #列印前五筆資料
+
+# Note: "https://data.nhi.gov.tw/resource/mask/maskdata.csv"
